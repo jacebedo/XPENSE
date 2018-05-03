@@ -21,6 +21,7 @@
   },
   "homepage": "https://github.com/jacebedo/XPENSE#readme",
   "dependencies": {
-    "express": "^4.16.3"
+    "express": "^4.16.3",
+    "mongoose": "^5.0.17"
   }
 }

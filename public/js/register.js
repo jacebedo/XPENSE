@@ -7,13 +7,7 @@ document.getElementById("submit").onclick = function(){
         bday: document.getElementById("bday").value,
         email: document.getElementById("email").value,
     }
-    var errorArray = [false,false,false,false,false,false];
-    var result = validateInformation(user,errorArray);
-    if (result == -1) {
-        // Check which fields are invalid
-    } else {
-        // Submit the form
-    }
+    document.getElementById("registrationForm").submit();
 }
 
 
