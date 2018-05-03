@@ -1,0 +1,39 @@
+<!DOCTYPE HTML>
+<html>
+    <head>
+        <title> XPENSE - Registration Page </title>
+        <link rel="stylesheet" href="./css/register.css"/>
+        <script type="text/javascript" src="./js/verify.js" defer></script>
+        <script type="text/javascript" src="./js/register.js" defer></script>
+
+    </head>
+    <body>
+        <section>
+
+            <form id="registrationForm" action="./user/register" method="POST">
+
+                <label for="username"> Username </label> <br/>
+                <input id="username" name="username" type="text" maxlength="15" required/><br/>
+
+                <label for="password"> Password </label> <br/>
+                <input id="password" name="password" type="password" required/><br/>
+
+                <label for="fname"> First Name </label> <br/>
+                <input id="fname" name="fname" type="text" placeholder="Jane" maxlength="15" required/><br/>
+
+                <label for="lname"> Last Name </label> <br/>
+                <input id="lname" name="lname" type="text" placeholder="Doe" maxlength="15" required/><br/>
+
+                <label for="bday"> Birthdate </label> <br/>
+                <input id="bday" name="bday" type="date" required/><br/>
+
+                <label for="email"> E-mail </label> <br/>
+                <input id="email" name="email" type="email" required/><br/>
+
+
+            </form>
+            <button id="submit"> Register </button>
+
+        </section>
+    </body>
+</html>

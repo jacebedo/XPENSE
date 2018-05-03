@@ -1,0 +1,31 @@
+body {
+    font-family: arial;
+}
+
+section {
+    display: inline-block;
+    padding: 50px;
+    border: 2px solid black;
+    border-radius: 15px;
+
+}
+
+form > * {
+    margin-top: 5px;
+    margin-bottom: 5px;
+}
+
+input,button {
+    border: 2px solid black;
+    border-radius: 7.5px;
+    background-color: #ddd;
+    color: black;
+    font-size: 14px;
+    padding: 15px;
+    width: 200px;
+}
+
+button {
+    margin: 15px;
+    margin-top: 25px;
+}
