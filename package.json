@@ -1,0 +1,26 @@
+{
+  "name": "xpense",
+  "version": "1.0.0",
+  "description": "A personal financing application in charge of budgeting and logging the customer's purchases and personal spending budgets",
+  "main": "server.js",
+  "directories": {
+    "test": "test"
+  },
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node server.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/jacebedo/XPENSE.git"
+  },
+  "author": "Jean Pierre Acebedo, jacebedo@sfu.ca",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/jacebedo/XPENSE/issues"
+  },
+  "homepage": "https://github.com/jacebedo/XPENSE#readme",
+  "dependencies": {
+    "express": "^4.16.3"
+  }
+}
