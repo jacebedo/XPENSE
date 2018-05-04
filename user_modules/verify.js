@@ -65,14 +65,28 @@ function isValidEmail(email){
 }
 
 function isEmptyObject(user){
+    /*
+     * input - user (Object)
+     * output - Boolean (true if the user object is empty)
+     *
+     */
 
+     if (Object.keys(user).length <= 0) {
+         return true;
+     }
+     return false;
 }
 
 module.exports = function(user){
+    /*
+     *  validateUser(user) - Checks if the user follows valid syntax (same syntax as client side)
+     *
+     */
 
-    if (user == undefined) { return false; }
+    if (user == null) { return false; }
 
-    if (isEmptyObject(user)) { return false; }
+    if (isEmptyObject(user)) {
+        return false; }
 
     if ( isValidUsername(user.username) && isValidPassword(user.password) &&
      isValidName(user.fname) && isValidName(user.lname) && isValidBday(user.bday) && isValidEmail(user.email)){

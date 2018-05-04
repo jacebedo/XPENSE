@@ -66,16 +66,26 @@ describe('Registration (Server)', function(){
     });
 
     describe('Correctness', function(){
+        
         it("should return a status code of 404 if the post request is empty", function(done){
             chai.request(app)
                 .post("/users/register")
                 .send({})
                 .end(function(err,res){
                     expect(res).to.have.status(404);
-                    expect(res).to.be.json;
                     expect(res).to.not.redirect;
-                    done();
+
+                    chai.request(app)
+                        .post("/users/register")
+                        .send(null)
+                        .end(function(err,res){
+                            expect(res).to.have.status(404);
+                            expect(res).to.not.redirect;
+                            done();
+                            });
                 });
+
+
         });
 
         it("should return a status code of 404 if the post request has one or more invalid properties", function(done){
