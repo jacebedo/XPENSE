@@ -17,7 +17,6 @@ function isValidName(fname){
 function isValidBday(date){
 
     if (isNaN(Date.parse(date))){
-        console.log("intercepted!");
         return false;
     };
 
