@@ -11,7 +11,6 @@ module.exports.connect = function(){
     });
 
     db.once('open',function(){
-        console.log("Database connection established!");
         return db;
     });
 };

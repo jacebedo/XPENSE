@@ -84,6 +84,7 @@ describe('Registration (Server)', function(){
                 password: "",
                 fname: "1234",
                 lname: "@@",
+                bday: new Date(00,00,01),
                 email: "not a good email"
             }
             chai.request(app)
@@ -91,7 +92,6 @@ describe('Registration (Server)', function(){
                 .send(badUser)
                 .end(function(err,res){
                     expect(res).to.have.status(404);
-                    expect(res).to.be.json;
                     expect(res).to.not.redirect;
                     done();
                 });

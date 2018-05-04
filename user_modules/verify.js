@@ -63,3 +63,21 @@ function isValidEmail(email){
     return exp.test(email);
 
 }
+
+function isEmptyObject(user){
+
+}
+
+module.exports = function(user){
+
+    if (user == undefined) { return false; }
+
+    if (isEmptyObject(user)) { return false; }
+
+    if ( isValidUsername(user.username) && isValidPassword(user.password) &&
+     isValidName(user.fname) && isValidName(user.lname) && isValidBday(user.bday) && isValidEmail(user.email)){
+         return true;
+    } else {
+        return false;
+    }
+}

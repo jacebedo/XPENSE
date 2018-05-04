@@ -1,6 +1,7 @@
 var express = require("express");
 var app = express();
 var mongoose = require("mongoose");
+const validateUser = require("./user_modules/verify.js");
 
 // Export server application for testing
 module.exports = app;
@@ -23,11 +24,16 @@ app.post("/users/register", function(req,res,next){
     User.findOne({username:req.body.username},{ password: 0, _id: 0,},function(err,doc){
 
         if (doc == null){
-            var newUser = new User(req.body);
-            newUser.save(function(err,doc){
-                res.redirect("/");
-                database.disconnect(db);
-            });
+            if (validateUser(req.body)){
+                var newUser = new User(req.body);
+                newUser.save(function(err,doc){
+                    res.redirect("/");
+                    database.disconnect(db);
+                });
+            } else {
+                res.status(404).end();
+            }
+
         } else {
             res.json(doc);
             database.disconnect(db);
@@ -42,7 +48,7 @@ app.delete("/users/delete/:username",function(req,res,next){
     User.deleteOne({username: req.params.username},function(err,result){
         if (err) {
             throw err;
-            res.status(404);
+            res.status(404).end();
         }
         res.send("OK");
         database.disconnect(db);
