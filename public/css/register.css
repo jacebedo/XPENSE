@@ -7,7 +7,7 @@ section {
     padding: 50px;
     border: 2px solid black;
     border-radius: 15px;
-
+    max-width: 300px;
 }
 
 form > * {
@@ -23,6 +23,15 @@ input,button {
     font-size: 14px;
     padding: 15px;
     width: 200px;
+}
+
+input.badInformation {
+    border: 2px solid red;
+    background-color: #ee918d;
+}
+
+#errorfixes {
+    color: red;
 }
 
 button {

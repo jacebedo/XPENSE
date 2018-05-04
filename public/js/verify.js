@@ -15,7 +15,7 @@ function isValidPassword(password){
      *  output - Boolean (true if password is valid)
      *
      */
-    var exp = new RegExp(/(\d*[A-Za-z]+\d+[A-Za-z0-9]*|\d+[A-Za-z]+[A-Za-z0-9]*)/g);
+    var exp = new RegExp(/^\d*[A-Za-z]+\d+[A-Za-z0-9]*$|^\d+[A-Za-z]+[A-Za-z0-9]*$/g);
     return (exp.test(password) && password.length >= 7);
 }
 

@@ -27,7 +27,7 @@ app.post("/users/register", function(req,res,next){
             if (validateUser(req.body)){
                 var newUser = new User(req.body);
                 newUser.save(function(err,doc){
-                    res.redirect("/");
+                    res.json(null);
                     database.disconnect(db);
                 });
             } else {

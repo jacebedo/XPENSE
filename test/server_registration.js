@@ -33,7 +33,7 @@ describe('Registration (Server)', function(){
                 });
             });
 
-        it("should redirect to the root page if the user does not exist in the database",function(done){
+        it("should return a null object if the user does not exist in the database",function(done){
             var newUser = {
                 username: "testUser",
                 password: "blankpass1",
@@ -48,9 +48,9 @@ describe('Registration (Server)', function(){
                 .send(newUser)
                 .end(function(err,res){
                     // Check if page redirects
-                    expect(res).to.redirect
                     expect(err).to.be.null;
-                    expect(res.body).to.be.an("Object").that.is.empty;
+                    expect(res).to.have.status(200);
+                    expect(res.body).to.be.a("null");
 
                     chai.request(app)
                         .delete(`/users/delete/${newUser.username}`)
@@ -66,7 +66,7 @@ describe('Registration (Server)', function(){
     });
 
     describe('Correctness', function(){
-        
+
         it("should return a status code of 404 if the post request is empty", function(done){
             chai.request(app)
                 .post("/users/register")

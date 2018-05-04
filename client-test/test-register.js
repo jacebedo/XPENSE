@@ -80,6 +80,11 @@ describe("Register", function() {
             var retval = isValidPassword("abcdefg!");
             expect(retval).to.be.false;
         });
+
+        it("should return flase for a password that has a space in the middle", function(){
+            var retval = isValidPassword("abcd 1234");
+            expect(retval).to.be.false;
+        });
     });
 
     describe("First/Last Name", function(){
