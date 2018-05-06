@@ -1,5 +1,5 @@
-describe("Register: REG02,REG03", function() {
-    // Assertion: "~/public/js/verify.js" is used to verify the information in the form.
+describe("Login - LOG02",function(){
+    // Assertion: ~/public/js/verify.js is used to verify the information in the form.
 
     describe("Username", function() {
         it("should return true for a valid username", function() {
@@ -89,81 +89,5 @@ describe("Register: REG02,REG03", function() {
         });
     });
 
-    describe("First/Last Name", function(){
 
-        it("should return true for a name that is valid by definition", function(){
-            var retval = isValidName("Jean Pierre");
-            expect(retval).to.be.true;
-        });
-
-        it("should return true for a name that is 2 characters in length (border case)",function(){
-            var retval = isValidName("JP");
-            expect(retval).to.be.true;
-        });
-
-        it("should return true for a name that is 15 characters in length (border case)", function(){
-            var retval = isValidName("Johnny Pleiades");
-            expect(retval).to.be.true;
-        });
-
-        it("should return true for a name that contains more than 2 words, but is valid",function(){
-            var retval = isValidName("tic tac toe");
-            expect(retval).to.be.true;
-        });
-
-        it("should return false for a name that is less than 2 characters in length", function(){
-            var retval = isValidName("K");
-            expect(retval).to.be.false;
-        });
-
-        it("should return false for a name that is more than 15 characters in length", function(){
-            var retval = isValidName("Pleiades Pleiades");
-            expect(retval).to.be.false;
-        });
-
-        it("should return false for a name that contains non-alphabetic characters (except the space character)",function(){
-            var retval = isValidName("J0HN_ B@C0n");
-            expect(retval).to.be.false;
-        });
-
-
-    });
-
-    describe("Birthday",function(){
-        it("should return true for a valid birthdate (any date past 1950-01-01)", function(){
-            var retval = isValidBday(new Date(96,09,21));
-            expect(retval).to.be.true;
-        });
-
-        it("should return false for a birthdate that is before 1950-01-01", function(){
-            var retval = isValidBday(new Date(0,0,10));
-            expect(retval).to.be.false;
-        });
-
-        it("should return false for a birthdate that is past the current date", function(){
-            var date = new Date();
-            date.setYear(date.getFullYear() + 1000);
-            var retval = isValidBday(date);
-            expect(retval).to.be.false;
-        });
-
-        it("should return false for a date that is not valid",function(){
-            var retval = isValidBday("abcd");
-            expect(retval).to.be.false;
-        });
-    });
-
-    describe("E-mail",function(){
-        it("should return true for valid e-mail syntax",function(){
-            var retval = isValidEmail("johnsmith1@gmail.com");
-            expect(retval).to.be.true;
-            retval = isValidEmail("jane_doe1_mail@sfu.ca");
-            expect(retval).to.be.true;
-        })
-
-        it("should return false for invalid e-mail syntax",function(){
-            var retval = isValidEmail("joh#@#!@#n@hotmail.com");
-            expect(retval).to.be.false;
-        });
-    });
 });
