@@ -13,7 +13,7 @@ var userSchema = require("./user_modules/Schemas/user.js");
 var User = mongoose.model("User",userSchema);
 
 
-app.use(express.static("public",{ index: "main.html" }));
+app.use(express.static("public",{ index: "login.html" }));
 app.use(express.json());
 app.use(express.urlencoded({extended: false}));
 
@@ -54,6 +54,7 @@ app.delete("/users/delete/:username",function(req,res,next){
         database.disconnect(db);
     });
 });
+
 
 var port = process.env.PORT | 3000;
 app.listen(port,function(err){

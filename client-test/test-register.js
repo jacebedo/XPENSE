@@ -1,4 +1,4 @@
-describe("Register", function() {
+describe("Register: REG02,REG03", function() {
     describe("Username", function() {
         it("should return true for a valid username", function() {
             var retval = isValidUsername("johnsmith1");

@@ -1,0 +1,25 @@
+<!DOCTYPE HTML>
+<html>
+    <head>
+        <title> XPENSE - Login Page </title>
+        <link rel="stylesheet" href="./css/login.css" />
+        <script type="text/javascript" src="./js/login.js"></script>
+    </head>
+    <body>
+        <section>
+            <h1> Log In to XPENSE </h1>
+            <form action="/users/login" method="POST">
+                <label for="username"> Username </label> <br/>
+                <input id="username" type="text" name="username" required/> <br/>
+
+                <label for="password"> Password </label> <br/>
+                <input id="password" type="password" name="password" required/> <br/>
+            </form>
+
+            <button id="submit"> Log In </button>
+         </section>
+        <section>
+            <a href="./register.html"> Register </a>
+        </section>
+    </body>
+</html>

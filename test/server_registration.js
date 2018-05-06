@@ -5,7 +5,7 @@ const expect = chai.expect;
 chai.use(chaiHttp);
 
 
-describe('Registration (Server)', function(){
+describe('Server Registration REG01,REG04', function(){
 
     describe('Uniqueness', function(){
 
