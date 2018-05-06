@@ -1,0 +1,41 @@
+body {
+    font-family: arial;
+}
+
+section {
+    display: inline-block;
+    padding: 50px;
+    border: 2px solid black;
+    border-radius: 15px;
+    max-width: 300px;
+    text-align: center;
+}
+
+form > * {
+    margin-top: 5px;
+    margin-bottom: 5px;
+}
+
+input,button {
+    border: 2px solid black;
+    border-radius: 7.5px;
+    background-color: #ddd;
+    color: black;
+    font-size: 14px;
+    padding: 15px;
+    width: 200px;
+}
+
+input.badInformation {
+    border: 2px solid red;
+    background-color: #ee918d;
+}
+
+#errorfixes {
+    color: red;
+}
+
+button {
+    margin: 15px;
+    margin-top: 25px;
+}

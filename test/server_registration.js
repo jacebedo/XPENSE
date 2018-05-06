@@ -5,7 +5,7 @@ const expect = chai.expect;
 chai.use(chaiHttp);
 
 
-describe('Server Registration REG01,REG04', function(){
+describe('Server Registration - REG01, REG04', function(){
 
     describe('Uniqueness', function(){
 
@@ -51,7 +51,7 @@ describe('Server Registration REG01,REG04', function(){
                     expect(err).to.be.null;
                     expect(res).to.have.status(200);
                     expect(res.body).to.be.a("null");
-
+                    // Delete the user for the next test
                     chai.request(app)
                         .delete(`/users/delete/${newUser.username}`)
                         .end(function(err,res){
