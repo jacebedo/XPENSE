@@ -7,7 +7,7 @@ chai.use(chaiHttp);
 
 describe("Login - LOG01, LOG03, LOG04", function(){
 
-    it("should redirect to the page profile.html if the user has successfully logged into the server.", function(done){
+    it("should return AUTH == 1 in the header and the redirect URL in the body if the user has successfully logged into the server.", function(done){
         // Assumption, this user already exists in the database.
         var existingUser = {
             username: "admin",
@@ -19,7 +19,9 @@ describe("Login - LOG01, LOG03, LOG04", function(){
             .send(existingUser)
             .end(function(err,res){
                 expect(err).to.be.null;
-                expect(res).to.redirect;
+                expect(res).to.have.status(200);
+                expect(res.body.redirectURL).to.equal("/profile.html");
+                expect(res).to.have.header('AUTH',"1");
                 done();
             });
     });
