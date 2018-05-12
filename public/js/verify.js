@@ -1,9 +1,12 @@
 function isValidUsername(username){
     /*
-     *  input - username (String) - the username of the user
-     *  output - Boolean (true if username is valid)
+     *  Input:username (String) - the username of the user
+     *  Output:Boolean (true if username is valid)
      *
      */
+
+     if (username == undefined) return false;
+
     var exp = new RegExp(/^[A-Za-z0-9]+[A-Za-z0-9_]*[A-Za-z0-9]+$/g);
     var username = username.trim();
     return (exp.test(username) && username.length >= 3 && username.length <= 15);
@@ -11,28 +14,33 @@ function isValidUsername(username){
 
 function isValidPassword(password){
     /*
-     *  input - password (String) - the password of the user
-     *  output - Boolean (true if password is valid)
+     *  Input:password (String) - the password of the user
+     *  Output:Boolean (true if password is valid)
      *
      */
+
+     if (password == undefined) return false;
+
     var exp = new RegExp(/^\d*[A-Za-z]+\d+[A-Za-z0-9]*$|^\d+[A-Za-z]+[A-Za-z0-9]*$/g);
     return (exp.test(password) && password.length >= 7);
 }
 
 function isValidName(name){
     /*
-     *  input - name (String) - the first or last name of the user
-     *  output - Boolean (true if name is valid)
+     *  Input:name (String) - the first or last name of the user
+     *  Output:Boolean (true if name is valid)
      *
      */
+    if (name == undefined) return false;
+
     var exp = new RegExp(/^[A-Za-z ]*([A-Za-z ]+)+$/g)
     return exp.test(name) && name.length <= 15 && name.length >= 2;
 }
 
 function isValidBday(date){
     /*
-     *  input - date (Date() Object) - the birth date of the user
-     *  output - Boolean (true if birthdate is valid)
+     *  Input:date (Date() Object) - the birth date of the user
+     *  Output:Boolean (true if birthdate is valid)
      *
      */
 
@@ -53,13 +61,73 @@ function isValidBday(date){
 
 function isValidEmail(email){
     /*
-     *  input - email (String) - the email of the user
-     *  output - Boolean (true if email is valid)
+     *  Input:email (String) - the email of the user
+     *  Output:Boolean (true if email is valid)
      *
      */
 
     // From emailregex.com - derived from IETF's RFC5322
     var exp = new RegExp(/^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/);
     return exp.test(email);
+
+}
+
+function isValidWalletName(name){
+    /*
+     *  Input: Name (String) - The name to verify
+     *  Output: Boolean - True if the name is valid and false otherwise
+     *
+     */
+     if (name == undefined) return false;
+
+     var exp= new RegExp(/[A-Za-z0-9]+[A-Za-z0-9. ]/g);
+     return exp.test(name) && name.length >= 3 && name.length <= 15;
+}
+
+function isValidWalletType(type){
+    if (type == undefined) return false;
+
+    var validTypes = ["one-time","daily","weekly","monthly"];
+    validTypes.forEach(function(t){
+        if (type === t) return true;
+    });
+    return false;
+}
+
+function isValidWalletBalance(balance){
+
+    /*
+     *  Input: Balance (Float) - The balance to verify
+     *  Output: Boolean - True if the balance is valid or false otherwise.
+     *
+     */
+
+    if (isNaN(parseFloat(balance))) return false;
+
+    var num = parseFloat(balance);
+    if (num >= 0) return true;
+    else return false;
+
+}
+
+function isValidWalletIncrement(increment,type){
+
+    /*
+     *  Input: Balance (Float) - The increment to verify
+     *         type (string) - the wallet type to verify.
+     *  Output: Boolean - True if the balance is valid or false otherwise.
+     *
+     */
+
+    if (isNaN(parseFloat(increment))) return false;
+
+    var num = parseFloat(increment);
+    if (num == 0 && type == "one-time") return true;
+    else if (num == 0 && (type == "daily" || type == "weekly" || type == "monthly")) return false;
+
+    if (num > 0 && type == "one-time") return false;
+    else if (num > 0 && (type == "daily" || type == "weekly" || type == "monthly")) return true;
+
+    else return false;
 
 }
