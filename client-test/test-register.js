@@ -43,6 +43,11 @@ describe("Register: REG02,REG03", function() {
             expect(retval).to.be.false;
         });
 
+        it("should return false for an undefined input.", function(){
+            var retval = isValidUsername(undefined);
+            expect(retval).to.be.false;
+        });
+
 
     });
 
@@ -87,6 +92,12 @@ describe("Register: REG02,REG03", function() {
             var retval = isValidPassword("abcd 1234");
             expect(retval).to.be.false;
         });
+
+        it("should return false for an undefined input.", function(){
+            var retval = isValidPassword(undefined);
+            expect(retval).to.be.false;
+        });
+
     });
 
     describe("First/Last Name", function(){
@@ -126,12 +137,16 @@ describe("Register: REG02,REG03", function() {
             expect(retval).to.be.false;
         });
 
+        it("should return false for an undefined input.", function(){
+            var retval = isValidName(undefined);
+            expect(retval).to.be.false;
+        });
 
     });
 
     describe("Birthday",function(){
         it("should return true for a valid birthdate (any date past 1950-01-01)", function(){
-            var retval = isValidBday(new Date(96,09,21));
+            var retval = isValidBday(new Date(96,9,21));
             expect(retval).to.be.true;
         });
 
@@ -151,6 +166,12 @@ describe("Register: REG02,REG03", function() {
             var retval = isValidBday("abcd");
             expect(retval).to.be.false;
         });
+
+        it("should return false for an undefined input.", function(){
+            var retval = isValidBday(undefined);
+            expect(retval).to.be.false;
+        });
+
     });
 
     describe("E-mail",function(){
@@ -165,5 +186,11 @@ describe("Register: REG02,REG03", function() {
             var retval = isValidEmail("joh#@#!@#n@hotmail.com");
             expect(retval).to.be.false;
         });
+
+        it("should return false for an undefined input.", function(){
+            var retval = isValidEmail(undefined);
+            expect(retval).to.be.false;
+        });
+
     });
 });

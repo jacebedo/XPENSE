@@ -43,6 +43,10 @@ describe("Login - LOG02",function(){
             expect(retval).to.be.false;
         });
 
+        it("should return false for an undefined input.", function(){
+            var retval = isValidUsername(undefined);
+            expect(retval).to.be.false;
+        });
 
     });
 
@@ -87,6 +91,12 @@ describe("Login - LOG02",function(){
             var retval = isValidPassword("abcd 1234");
             expect(retval).to.be.false;
         });
+
+        it("should return false for an undefined input.", function(){
+            var retval = isValidPassword(undefined);
+            expect(retval).to.be.false;
+        });
+
     });
 
 

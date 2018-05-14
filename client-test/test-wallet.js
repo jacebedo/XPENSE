@@ -39,6 +39,12 @@ describe("Wallet - WAL01, WAL02",function(){
             expect(test2).to.be.false;
             expect(test3).to.be.false;
         });
+
+        it("should return false for an undefined input.", function(){
+            var test = isValidWalletName(undefined);
+            expect(test).to.be.false;
+        });
+
     });
 
     describe("Type",function(){
@@ -65,6 +71,12 @@ describe("Wallet - WAL01, WAL02",function(){
             expect(test3).to.be.false;
             expect(test4).to.be.false;
         });
+
+        it("should return false for an undefined input.", function(){
+            var test = isValidWalletType(undefined);
+            expect(test).to.be.false;
+        });
+
 
     });
 
@@ -98,6 +110,11 @@ describe("Wallet - WAL01, WAL02",function(){
             expect(test1).to.be.false;
             expect(test2).to.be.false;
         })
+
+        it("should return false for an undefined input.", function(){
+            var test = isValidWalletBalance(undefined);
+            expect(test).to.be.false;
+        });
 
     });
 
@@ -168,6 +185,11 @@ describe("Wallet - WAL01, WAL02",function(){
             expect(test2).to.be.false;
             expect(test3).to.be.false;
             expect(test4).to.be.false;
+        });
+
+        it("should return false for an undefined input.", function(){
+            var test = isValidWalletIncrement(undefined);
+            expect(test).to.be.false;
         });
     });
 
