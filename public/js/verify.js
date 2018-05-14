@@ -80,7 +80,7 @@ function isValidWalletName(name){
      */
      if (name == undefined) return false;
 
-     var exp= new RegExp(/[A-Za-z0-9]+[A-Za-z0-9. ]/g);
+     var exp= new RegExp(/[A-Za-z0-9]+[A-Za-z0-9. ]*/g);
      return exp.test(name) && name.length >= 3 && name.length <= 15;
 }
 
@@ -128,6 +128,47 @@ function isValidWalletIncrement(increment,type){
     if (num > 0 && type == "one-time") return false;
     else if (num > 0 && (type == "daily" || type == "weekly" || type == "monthly")) return true;
 
+    else return false;
+
+}
+
+function isValidExpenseName(name){
+    /*
+     *  Input: Name (String) - The name to verify
+     *  Output: Boolean - True if the name is valid and false otherwise
+     *
+     */
+     if (name == undefined) return false;
+
+     var exp= new RegExp(/[A-Za-z0-9]+[A-Za-z0-9. ]*/g);
+     return exp.test(name) && name.length >= 3 && name.length <= 40;
+}
+
+function isValidExpenseType(type){
+    /*
+     *  Input: type (String) - The type to verify
+     *  Output: Boolean - True if the type is valid, and false otherwise.
+     *
+     *
+     */
+    var exp = new RegExp(/[A-Za-z]+[A-Za-z ]*/g);
+    if (type == undefined) return false;
+
+    return exp.test(type) && type.length >= 3 && type.length <= 15;
+}
+
+function isValidExpensePrice(price){
+
+    /*
+     *  Input: Balance (Float) - The price to verify
+     *  Output: Boolean - True if the price is valid or false otherwise.
+     *
+     */
+
+    if (isNaN(parseFloat(price))) return false;
+
+    var num = parseFloat(price);
+    if (num > 0) return true;
     else return false;
 
 }
