@@ -19,6 +19,7 @@
 
     </head>
     <body>
+        <!-- Content Container -->
         <div class = "container-fluid">
             <div class="row">
                 <div id="navContainer" class="col-xl-2">
@@ -43,6 +44,7 @@
                                 <tbody>
                                 </tbody>
                             </table>
+                            <button id="openWalletModalButton" class="btn-dark" data-toggle="modal" data-target="#walletCreateModal"> Add a Wallet </button>
                         </div>
 
                         <div id="expensesContainer"class="col-xl-6">
@@ -60,11 +62,110 @@
                                 <tbody>
                                 </tbody>
                             </table>
+                            <button id="openExpenseModalButton" class="btn-dark" data-toggle="modal" data-target="#expenseCreateModal"> Add an Expense </button>
                         </div>
                     </div>
 
                 </div>
             </div>
         </div>
+
+        <!-- Wallet Modal -->
+        <div id="walletCreateModal" class="modal fade">
+            <div class="modal-dialog modal-lg" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title"> Create a Wallet </h5>
+                    </div>
+                    <div class="modal-body">
+                        <form id="walletForm" method="POST" action="/add/wallet">
+                          <div class="form-group">
+                            <label for="walletName"> Wallet Name </label>
+                            <input class="form-control" id="walletName" name="walletName" type="text" placeholder ="Wallet Name" required/>
+                          </div>
+
+                          <div class="form-group">
+                            <label for="walletType"> Wallet Type </label>
+                            <select id="walletType" class="custom-select" name="walletType" required>
+                              <option selected></option>
+                              <option value="one-time">One-Time</option>
+                              <option value="daily">Daily Deposits</option>
+                              <option value="weekly">Weekly Deposits</option>
+                              <option value="monthly">Monthly Deposits</option>
+                            </select>
+                          </div>
+
+                          <label for="walletBalance"> Initial Balance </label>
+                          <div class="input-group">
+                            <div class="input-group-prepend">
+                              <span class="input-group-text">$</span>
+                            </div>
+                            <input class="form-control" id="walletBalance" name="walletBalance" type="number" min="0.00" step="0.01" placeholder ="" required/> <br>
+                          </div>
+
+                          <label for="walletIncrement"> Wallet Increment </label>
+                          <div class="input-group">
+                            <div class="input-group-prepend">
+                              <span class="input-group-text">$</span>
+                            </div>
+                            <input class="form-control" id="walletIncrement" name="walletIncrement" type="number" min="0.00" step="0.01" placeholder ="" required/> <br>
+                          </div>
+
+                        </form>
+                    </div>
+                    <div class="modal-footer">
+                        <button id="addWallet" class="btn btn-success"> Add this wallet </button>
+                        <button class="btn btn-secondary btn-danger" data-dismiss="modal">Close</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+
+        <!-- Expense Modal -->
+        <div id="expenseCreateModal" class="modal fade">
+            <div class="modal-dialog modal-lg" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h3 class="modal-title"> Add an Expense </h3>
+                    </div>
+                    <div class="modal-body">
+                        <form id="expenseForm">
+                          <div class="form-group">
+                            <label for="expenseName"> Expense Name </label>
+                            <input class="form-control" id="expenseName" name="expenseName" type="text" placeholder ="Expense Name" required/>
+                          </div>
+
+                          <label for="expenseValue"> Value of Expense </label>
+                          <div class="input-group">
+                            <div class="input-group-prepend">
+                              <span class="input-group-text">$</span>
+                            </div>
+                            <input class="form-control" id="expenseValue" name="expenseValue" type="number" min="0.00" step="0.01" placeholder ="" required/>
+                          </div>
+
+                          <br>
+                          <div class="form-group">
+                            <label for="expenseType"> Expense Type </label>
+                            <input class="form-control" id="expenseType" name="expenseType" type="text" placeholder="Expense Type" required/>
+                          </div>
+
+                          <div class="form-group">
+                            <label for="expenseWallet"> Select a wallet </label>
+                            <select id="expenseWallet"class="custom-select" name="expenseWallet" required>
+                              <option selected></option>
+                            </select>
+                          </div>
+
+                        </form>
+                    </div>
+                    <div class="modal-footer">
+                        <button id="addExpense" class="btn btn-success"> Add this Expense </button>
+                        <button class="btn btn-secondary btn-danger" data-dismiss="modal">Close</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
     </body>
 </html>
