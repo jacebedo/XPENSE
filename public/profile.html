@@ -3,15 +3,68 @@
     <head>
         <title> XPENSE - Profile </title>
 
+
+        <!-- JQuery -->
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+        <!-- Bootstrap JS Dependency -->
+        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+        <!-- Bootstrap CSS -->
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+
+        <!-- Font face  -->
+        <link href="https://fonts.googleapis.com/css?family=Oswald:400,600" rel="stylesheet">
+
         <link rel="stylesheet" href="./css/profile.css" />
-
-        <!-- jQuery  -->
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.0.0/jquery.min.js"></script>
-
         <script type="text/javascript" src="./js/profile.js" defer></script>
 
     </head>
     <body>
-        Hello World!
+        <div class = "container-fluid">
+            <div class="row">
+                <div id="navContainer" class="col-xl-2">
+                    <!-- Navigation bar goes here -->
+                </div>
+
+                <div id="contentContainer" class="col-xl-8">
+                    <h1 class="display-3"> Your Profile </h1> <hr/>
+                    <div class="row">
+
+                        <div id="walletContainer" class="col-xl-6">
+                            <h3 class="display-5"> Wallets </h3>
+                            <table id="walletsTable" class="table table-dark table-striped">
+                                <thead>
+                                    <tr>
+                                        <th>Name</th>
+                                        <th>Balance</th>
+                                        <th>Type</th>
+                                        <th>Last Updated</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                </tbody>
+                            </table>
+                        </div>
+
+                        <div id="expensesContainer"class="col-xl-6">
+                            <h3 class="display-5"> Expenses </h3>
+                            <table id="expensesTable" class="table table-dark table-striped">
+                                <thead>
+                                    <tr>
+                                        <th>Name</th>
+                                        <th>Type</th>
+                                        <th>Price</th>
+                                        <th>Wallet</th>
+                                        <th>Date</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </div>
     </body>
 </html>

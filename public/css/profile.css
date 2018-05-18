@@ -1,0 +1,26 @@
+body {
+    background-color: #002e4d;
+    color:white;
+}
+
+#navContainer {
+    display:block;
+}
+
+
+div#contentContainer {
+    display: block;
+    height: 100vh;
+    max-height: 100vh;
+
+}
+
+h1 {
+    padding-top: 50px;
+    padding-bottom: 50px;
+}
+
+
+th {
+    padding-right: 4vw;
+}
