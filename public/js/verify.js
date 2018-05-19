@@ -85,13 +85,14 @@ function isValidWalletName(name){
 }
 
 function isValidWalletType(type){
+    retval = false;
     if (type == undefined) return false;
 
     var validTypes = ["one-time","daily","weekly","monthly"];
     validTypes.forEach(function(t){
-        if (type === t) return true;
+        if (type === t) retval = true;
     });
-    return false;
+    return retval;
 }
 
 function isValidWalletBalance(balance){

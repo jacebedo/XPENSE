@@ -10,9 +10,10 @@ module.exports = app;
 // Used to connect and disconnect to the database.
 const database = require("./user_modules/database.js");
 const userSchema = require("./user_modules/Schemas/user.js");
+const walletSchema = require("./user_modules/Schemas/wallet.js");
 
 const User = mongoose.model("User",userSchema);
-
+const Wallet = mongoose.model("Wallet",walletSchema);
 
 app.use(express.static("public",{ index: "login.html" }));
 app.use(express.json());
@@ -75,6 +76,35 @@ app.post("/users/login", function(req,res,next){
     });
 });
 
+app.post("/users/addwallet/me", function(req,res,next){
+    if (req.session.user != undefined) {
+        var newWallet = new Wallet({
+            owner: req.session.user._id.$oid,
+            name: req.body.name,
+            type: req.body.type,
+            balance: req.body.balance,
+            increment: req.body.increment,
+            lastUpdated: req.body.lastUpdated
+        });
+        newWallet.save(function(err,doc){
+            if (err) {throw err;}
+            res.json(doc);
+        });
+    };
+});
+
+
+app.get("/users/getdata/me", function(req,res,next){
+    if (req.session.user == undefined) {
+        res.json(null);
+    } else {
+        var dataObject = {};
+        Wallet.find({owner: req.session.user._id.$oid}).find(function(err,docs){
+            dataObject.wallets = docs;
+            res.json(dataObject);
+        });
+    }
+});
 // Delete after production!
 app.delete("/users/delete/:username",function(req,res,next){
     var db = database.connect();
