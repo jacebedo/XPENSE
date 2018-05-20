@@ -3,7 +3,7 @@ const app = express();
 const session = require("express-session");
 const mongoose = require("mongoose");
 const validateUser = require("./user_modules/verify.js");
-
+const sendAllData = require("./user_modules/sendAllData.js");
 // Export server application for testing
 module.exports = app;
 
@@ -91,11 +91,11 @@ app.post("/users/addwallet/me", function(req,res,next){
         var db = database.connect();
         newWallet.save(function(err,doc){
             if (err) {throw err;}
-            res.json(doc);
+            next();
             database.disconnect(db);
         });
     };
-});
+},sendAllData);
 
 app.post("/users/addexpense/me",function(req,res,next){
     if (req.session.user != undefined){
@@ -110,26 +110,15 @@ app.post("/users/addexpense/me",function(req,res,next){
         var db = database.connect();
         newExpense.save(function(err,doc){
             if (err) throw err;
-            res.json(doc);
-            database.disconnect(db);
-        });
-    }
-});
-
-app.get("/users/getdata/me", function(req,res,next){
-    if (req.session.user == undefined) {
-        res.json(null);
-    } else {
-        var dataObject = {};
-        Wallet.find({owner: req.session.user._id.$oid}).find(function(err,docs){
-            dataObject.wallets = docs;
-            Expense.find({owner: req.session.user._id.$oid}).find(function(err,docs){
-                dataObject.expenses = docs;
-                res.json(dataObject);
+            Wallet.findOneAndUpdate({name: doc.wallet}, { $inc: { balance: -1 * parseFloat(doc.price) } },function(err,doc){
+                next();
+                database.disconnect(db);
             });
         });
     }
-});
+},sendAllData);
+
+app.get("/users/getdata/me",sendAllData);
 // Delete after production!
 app.delete("/users/delete/:username",function(req,res,next){
     var db = database.connect();

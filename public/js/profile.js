@@ -21,9 +21,10 @@ $("#addWallet").click(function(){
             url: "./users/addwallet/me",
             method: "post",
             data: wallet,
-            success: function(doc,status){
+            success: function(docs,status){
 
                 $("#walletCreateModal").modal("toggle");
+                updateProfile(doc,status);
             }
         })
     } else {
@@ -45,8 +46,9 @@ $("#addExpense").click(function(){
             url: "./users/addexpense/me",
             method: "post",
             data: expense,
-            success: function(doc,status){
+            success: function(docs,status){
                 $("#expenseCreateModal").modal("toggle");
+                updateProfile(docs,status);
             }
         });
     } else {
@@ -116,7 +118,6 @@ function verifyExpenseObject(expense,errorMap){
 };
 
 function updateProfile(data,status){
-    console.log(data);
     // Update expense table
     $("#expensesTable >  tbody").empty();
     for (expense of data.expenses) {
