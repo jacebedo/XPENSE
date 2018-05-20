@@ -8,6 +8,5 @@ module.exports = new Schema({
     lname: String,
     bday: Date,
     email: String
-    // To-do: Add wallet and expense feature to user schema
 
 }, {versionKey: false} );

@@ -11,9 +11,11 @@ module.exports = app;
 const database = require("./user_modules/database.js");
 const userSchema = require("./user_modules/Schemas/user.js");
 const walletSchema = require("./user_modules/Schemas/wallet.js");
+const expenseSchema = require("./user_modules/Schemas/expense.js");
 
 const User = mongoose.model("User",userSchema);
 const Wallet = mongoose.model("Wallet",walletSchema);
+const Expense = mongoose.model("Expense",expenseSchema);
 
 app.use(express.static("public",{ index: "login.html" }));
 app.use(express.json());
@@ -86,13 +88,33 @@ app.post("/users/addwallet/me", function(req,res,next){
             increment: req.body.increment,
             lastUpdated: req.body.lastUpdated
         });
+        var db = database.connect();
         newWallet.save(function(err,doc){
             if (err) {throw err;}
             res.json(doc);
+            database.disconnect(db);
         });
     };
 });
 
+app.post("/users/addexpense/me",function(req,res,next){
+    if (req.session.user != undefined){
+        var newExpense = new Expense({
+            owner: req.session.user._id.$oid,
+            name: req.body.name,
+            price: req.body.price,
+            type: req.body.type,
+            wallet: req.body.wallet,
+            date: req.body.date
+        });
+        var db = database.connect();
+        newExpense.save(function(err,doc){
+            if (err) throw err;
+            res.json(doc);
+            database.disconnect(db);
+        });
+    }
+});
 
 app.get("/users/getdata/me", function(req,res,next){
     if (req.session.user == undefined) {
@@ -101,7 +123,10 @@ app.get("/users/getdata/me", function(req,res,next){
         var dataObject = {};
         Wallet.find({owner: req.session.user._id.$oid}).find(function(err,docs){
             dataObject.wallets = docs;
-            res.json(dataObject);
+            Expense.find({owner: req.session.user._id.$oid}).find(function(err,docs){
+                dataObject.expenses = docs;
+                res.json(dataObject);
+            });
         });
     }
 });

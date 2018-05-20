@@ -22,8 +22,8 @@ $("#addWallet").click(function(){
             method: "post",
             data: wallet,
             success: function(doc,status){
-                console.log(JSON.stringify(doc));
-                $('#walletCreateModal').modal('toggle');
+
+                $("#walletCreateModal").modal("toggle");
             }
         })
     } else {
@@ -33,16 +33,24 @@ $("#addWallet").click(function(){
 
 $("#addExpense").click(function(){
     var expense = {
-        name: $("expenseName").val(),
-        type: $("expenseType").val(),
-        price: $("expensePrice").val(),
-        wallet: $("expenseWallet").val(),
+        name: $("#expenseName").val(),
+        type: $("#expenseType").val(),
+        price: $("#expensePrice").val(),
+        wallet: $("#expenseWallet").val(),
         date: new Date()
     }
     var errorMap = [0,0,0,0,0];
     if (verifyExpenseObject(expense,errorMap)){
-
+        $.ajax({
+            url: "./users/addexpense/me",
+            method: "post",
+            data: expense,
+            success: function(doc,status){
+                $("#expenseCreateModal").modal("toggle");
+            }
+        });
     } else {
+        console.log(errorMap);
         displayExpenseModalError(errorMap);
     }
 });
@@ -103,16 +111,18 @@ function verifyExpenseObject(expense,errorMap){
         errorMap[4] = 1;
         retval = false;
     }
+
+    return retval;
 };
 
 function updateProfile(data,status){
     console.log(data);
     // Update expense table
-    // $("#expensesTable >  tbody").empty();
-    // for (expense of data.expenses) {
-    //     $("#expensesTable > tbody").append(generateExpenseChild(expense));
+    $("#expensesTable >  tbody").empty();
+    for (expense of data.expenses) {
+        $("#expensesTable > tbody").append(generateExpenseChild(expense));
 
-    // }
+    }
     // Update wallets table
     $("#expenseWallet").empty();
     $("#walletsTable > tbody").empty();
@@ -134,14 +144,14 @@ function generateExpenseChild(expense) {
      *  *Expense Object:
      *  _id(number),name(string),type(string),price(number),wallet(string),date(date)
      */
-
+     var date = new Date(expense.date);
      return `
      <tr>
         <td> ${expense.name} </td>
         <td> ${expense.type} </td>
         <td> ${expense.price} </td>
         <td> ${expense.wallet} </td>
-        <td> ${expense.date.toLocaleDateString()}</td>
+        <td> ${date.toDateString()}</td>
      </tr>
      `
 }
@@ -169,4 +179,8 @@ function generateWalletChild(wallet){
 
 function displayWalletModalError(errorMap){
     console.log("bad error!");
+}
+
+function displayExpenseModalError(errorMap){
+    console.log("Bad error");
 }
