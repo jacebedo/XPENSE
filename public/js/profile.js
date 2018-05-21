@@ -24,7 +24,7 @@ $("#addWallet").click(function(){
             success: function(docs,status){
 
                 $("#walletCreateModal").modal("toggle");
-                updateProfile(doc,status);
+                updateProfile(docs,status);
             }
         })
     } else {

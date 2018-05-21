@@ -7,31 +7,33 @@ body {
     display:block;
 }
 
-
-div#contentContainer {
-    display: block;
-    height: 100vh;
-    max-height: 100vh;
-
-}
-
 button#openWalletModalButton, button#openExpenseModalButton {
-    /* Mobile layout does not work for this screen */
-    position:relative;
-    top: 50vh;
     width: inherit;
-    height: 5vh;
+    margin-top: 0.2rem;
+    height: 3rem;
 }
 
+table {
+    width: 100%;
+    max-width: 100%;
+}
+
+tbody {
+    display: block;
+    height: 50vh;
+    max-height: 50vh;
+    overflow-y: scroll;
+}
+
+tr {
+    display: table;
+    width: 100%;
+    table-layout: fixed;
+}
 
 h1 {
     padding-top: 50px;
     padding-bottom: 50px;
-}
-
-
-th {
-    padding-right: 4vw;
 }
 
 .modal-content{
