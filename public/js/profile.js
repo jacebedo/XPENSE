@@ -198,8 +198,6 @@ function showWalletInfoModal(doc,status){
     /*
      *  Procedure: (1) Update the information fields in the modal, using doc.information [DONE]
      *             (2) Update the 'recent expenses' field, using doc.expenses [DONE]
-     *             (3) Update the event listener to properly add an expense
-     *
      *
      */
      if (doc != undefined){
@@ -210,6 +208,7 @@ function showWalletInfoModal(doc,status){
 }
 
 function updateWalletInfoModal(info){
+    $("#walletINfoTable > tbody > tr > td").empty();
     $("#walletInfoTable > tbody > #walletInfoName > .field").text(info.name);
     $("#walletInfoTable > tbody > #walletInfoType > .field").text(info.type);
     $("#walletInfoTable > tbody > #walletInfoLastUpdated > .field").text(info.lastUpdated);
@@ -223,6 +222,41 @@ function updateWalletInfoExpenses(expenses){
             $("#walletInfoExpenses > tbody").append(generateExpenseChild(item));
         }
     }
+}
+
+$("#addBalance").click(function(){
+    if($("#walletInfoTable > tbody > #walletInfoName > .field").text() != ""){
+        /* Procedure:
+         *
+         *  1. Open modal to enter a price.
+         *  2. Submit an POST request to the server
+         *  3. Update fields of the wallet
+         *
+         */
+         $(".modal").modal("hide");
+         $("#addBalanceModal").modal("toggle");
+         $("#submitBalance").click(undefined);
+         $("#submitBalance").click(function(){
+            $.ajax({
+                url: "./users/wallet/updateBalance/",
+                method: "POST",
+                data: {
+                    wallet: $("#walletInfoTable > tbody > #walletInfoName > .field").text(),
+                    balance: $("#BalanceAmount").val()
+                },
+                success: function(doc,status){
+                    $(".modal").modal("hide");
+                    updateProfile(doc,status);
+                }
+            })
+         });
+
+    }
+
+});
+
+function updateWalletProfile(doc,status){
+    $(".modal").modal("hide");
 }
 
 function displayWalletModalError(errorMap){

@@ -169,6 +169,7 @@
             </div>
         </div>
 
+        <!-- Wallet Information Modal -->
         <div id="walletInformationModal" class="modal fade">
             <div class="modal-dialog modal-lg" role="document">
                 <div class="modal-content">
@@ -216,12 +217,40 @@
                         </table>
                     </div>
                     <div class="modal-footer">
-                        <button id="addBalance" class="btn btn-success" onclick="addBalance(null)" > Deposit funds into this wallet </button>
+                        <button id="addBalance" class="btn btn-success"> Deposit funds into this wallet </button>
                         <button class="btn btn-secondary btn-danger" data-dismiss="modal"> Close </button>
                     </div>
 
                 </div>
             </div>
         </div>
+
+        <!-- Wallet Information Modal -->
+        <div id="addBalanceModal" class="modal fade">
+            <div class="modal-dialog modal-sm" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h3 class="modal-title"> Add Balance </h3>
+                    </div>
+                    <div class="modal-body">
+                        <form action="javascript:void(0)">
+                            <div class="input-group">
+                              <div class="input-group-prepend">
+                                <span class="input-group-text">$</span>
+                              </div>
+                              <input class="form-control" id="BalanceAmount" name="balance" type="number" min="0.00" step="0.01" placeholder ="" required/>
+                            </div>
+                        </form>
+                    </div>
+                    <div class="modal-footer">
+                        <button id="submitBalance" class="btn btn-success"> Deposit </button>
+                        <button class="btn btn-secondary btn-danger" data-dismiss="modal"> Close </button>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+
+
     </body>
 </html>

@@ -138,6 +138,17 @@ app.get("/users/wallet/getInformation/:name",function(req,res,next){
     }
 });
 
+app.post("/users/wallet/updateBalance",function(req,res,next){
+    if (req.session.user != undefined){
+        var dataObject = {};
+        Wallet.updateOne({owner: req.session.user._id, name: req.body.wallet},
+                         { $inc: { "balance": req.body.balance }, $set: { "lastUpdated": new Date() }},
+                          function(err,doc){
+                              sendAllData(req,res,next);
+                          });
+    }
+});
+
 // Delete after production!
 app.delete("/users/delete/:username",function(req,res,next){
     var db = database.connect();
