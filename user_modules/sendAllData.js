@@ -12,9 +12,9 @@ module.exports = function(req,res,next){
         res.json(null);
     } else {
         var dataObject = {};
-        Wallet.find({owner: req.session.user._id.$oid}).find(function(err,docs){
+        Wallet.find({owner: req.session.user._id}).find(function(err,docs){
             dataObject.wallets = docs;
-            Expense.find({owner: req.session.user._id.$oid}).find(function(err,docs){
+            Expense.find({owner: req.session.user._id}).find(function(err,docs){
                 dataObject.expenses = docs;
                 res.json(dataObject);
             });

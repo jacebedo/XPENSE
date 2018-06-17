@@ -16,7 +16,7 @@
 
         <link rel="stylesheet" href="./css/profile.css" />
         <link rel="stylesheet" href="./css/scrollbars.css" />
-        
+
         <script type="text/javascript" src="./js/profile.js" defer></script>
         <script type="text/javascript" src="./js/verify.js"></script>
     </head>
@@ -169,5 +169,59 @@
             </div>
         </div>
 
+        <div id="walletInformationModal" class="modal fade">
+            <div class="modal-dialog modal-lg" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h3 class="modal-title"> Wallet Information </h3>
+                    </div>
+                    <div class="modal-body">
+                        <table id="walletInfoTable" class="table table-dark">
+                            <tbody>
+                                <tr id="walletInfoName">
+                                    <td>Name:</td>
+                                    <td class="field"></td>
+                                </tr>
+
+                                <tr id="walletInfoType">
+                                    <td>Type:</td>
+                                    <td class="field"></td>
+                                </tr>
+
+                                <tr id="walletInfoBalance">
+                                    <td>Current Balance: </td>
+                                    <td class="field"></td>
+                                </tr>
+
+                                <tr id="walletInfoLastUpdated">
+                                    <td>Last Updated: </td>
+                                    <td class="field"></td>
+                                </tr>
+                            </tbody>
+                        </table>
+
+                        <h3> Last 5 Expenses </h3>
+                        <table id="walletInfoExpenses" class="table table-dark table-striped">
+                            <thead>
+                                <tr>
+                                    <th>Name</th>
+                                    <th>Type</th>
+                                    <th>Price</th>
+                                    <th>Wallet</th>
+                                    <th>Date</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                            </tbody>
+                        </table>
+                    </div>
+                    <div class="modal-footer">
+                        <button id="addBalance" class="btn btn-success" onclick="addBalance(null)" > Deposit funds into this wallet </button>
+                        <button class="btn btn-secondary btn-danger" data-dismiss="modal"> Close </button>
+                    </div>
+
+                </div>
+            </div>
+        </div>
     </body>
 </html>

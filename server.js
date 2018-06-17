@@ -64,6 +64,7 @@ app.post("/users/login", function(req,res,next){
         else {
             if (doc.username == req.body.username && doc.password == req.body.password){
                 req.session.user = doc;
+
                 req.session.user.AUTH = 1;
                 res.setHeader("AUTH","1");
                 res.json({redirectURL: "/profile.html"});
@@ -81,7 +82,7 @@ app.post("/users/login", function(req,res,next){
 app.post("/users/addwallet/me", function(req,res,next){
     if (req.session.user != undefined) {
         var newWallet = new Wallet({
-            owner: req.session.user._id.$oid,
+            owner: req.session.user._id,
             name: req.body.name,
             type: req.body.type,
             balance: req.body.balance,
@@ -100,7 +101,7 @@ app.post("/users/addwallet/me", function(req,res,next){
 app.post("/users/addexpense/me",function(req,res,next){
     if (req.session.user != undefined){
         var newExpense = new Expense({
-            owner: req.session.user._id.$oid,
+            owner: req.session.user._id,
             name: req.body.name,
             price: req.body.price,
             type: req.body.type,
@@ -110,7 +111,7 @@ app.post("/users/addexpense/me",function(req,res,next){
         var db = database.connect();
         newExpense.save(function(err,doc){
             if (err) throw err;
-            Wallet.findOneAndUpdate({name: doc.wallet}, { $inc: { balance: -1 * parseFloat(doc.price) } },function(err,doc){
+            Wallet.findOneAndUpdate({name: doc.wallet}, { $inc: { balance: -1 * parseFloat(doc.price) }, $set: { lastUpdated: new Date()} },function(err,doc){
                 next();
                 database.disconnect(db);
             });
@@ -119,6 +120,24 @@ app.post("/users/addexpense/me",function(req,res,next){
 },sendAllData);
 
 app.get("/users/getdata/me",sendAllData);
+
+app.get("/users/wallet/getInformation/:name",function(req,res,next){
+    if (req.session.user != undefined){
+        var dataObject = {};
+        Wallet.findOne({owner: req.session.user._id, name: req.params.name.trim()}, function(err,doc){
+            dataObject.information = doc;
+            Expense.find({owner: req.session.user._id, wallet: req.params.name.trim()})
+                   .sort({'date': 'descending'})
+                   .limit(5)
+                   .exec(function(err,docs){
+                       dataObject.expenses = docs;
+                       res.json(dataObject);
+            });
+
+        });
+    }
+});
+
 // Delete after production!
 app.delete("/users/delete/:username",function(req,res,next){
     var db = database.connect();

@@ -133,6 +133,7 @@ function updateProfile(data,status){
         $("#expenseWallet").append(`<option> ${wallet.name} </option> `);
     }
 
+    setWalletEventListeners();
 
 }
 
@@ -148,11 +149,11 @@ function generateExpenseChild(expense) {
      var date = new Date(expense.date);
      return `
      <tr>
-        <td> ${expense.name} </td>
-        <td> ${expense.type} </td>
-        <td> ${expense.price} </td>
-        <td> ${expense.wallet} </td>
-        <td> ${date.toDateString()}</td>
+        <td class="e-name"> ${expense.name} </td>
+        <td class="e-type"> ${expense.type} </td>
+        <td class="e-price"> ${expense.price} </td>
+        <td class="e-wallet"> ${expense.wallet} </td>
+        <td class="e-date"> ${date.toDateString()}</td>
      </tr>
      `
 }
@@ -170,12 +171,58 @@ function generateWalletChild(wallet){
      var date = new Date(wallet.lastUpdated);
      return `
      <tr>
-        <td> ${wallet.name} </td>
-        <td> ${parseFloat(wallet.balance).toFixed(2)} </td>
-        <td> ${wallet.type} </td>
-        <td> ${date.toDateString()} </td>
+        <td class="w-name"> ${wallet.name} </td>
+        <td class="w-balance"> ${parseFloat(wallet.balance).toFixed(2)} </td>
+        <td class="w-type"> ${wallet.type} </td>
+        <td class="w-date"> ${date.toDateString()} </td>
      </tr>
      `
+}
+
+function setWalletEventListeners(){
+
+    $("#walletsTable > tbody > tr").click(function(){
+        var name = $(this).find(".w-name").text();
+        // Submit ajax request to get full information about this wallet
+        $.ajax({
+            url: `./users/wallet/getInformation/${name}`,
+            method: "get",
+            data: {},
+            success: showWalletInfoModal
+        });
+    });
+}
+
+
+function showWalletInfoModal(doc,status){
+    /*
+     *  Procedure: (1) Update the information fields in the modal, using doc.information [DONE]
+     *             (2) Update the 'recent expenses' field, using doc.expenses [DONE]
+     *             (3) Update the event listener to properly add an expense
+     *
+     *
+     */
+     if (doc != undefined){
+         updateWalletInfoModal(doc.information);
+         updateWalletInfoExpenses(doc.expenses);
+         $("#walletInformationModal").modal("toggle");
+     }
+}
+
+function updateWalletInfoModal(info){
+    $("#walletInfoTable > tbody > #walletInfoName > .field").text(info.name);
+    $("#walletInfoTable > tbody > #walletInfoType > .field").text(info.type);
+    $("#walletInfoTable > tbody > #walletInfoLastUpdated > .field").text(info.lastUpdated);
+    $("#walletInfoTable > tbody > #walletInfoBalance > .field").text(info.balance);
+}
+
+function updateWalletInfoExpenses(expenses){
+    $("#walletInfoExpenses > tbody").empty();
+    if (expenses != undefined) {
+        for (item of expenses) {
+            $("#walletInfoExpenses > tbody").append(generateExpenseChild(item));
+        }
+    }
 }
 
 function displayWalletModalError(errorMap){

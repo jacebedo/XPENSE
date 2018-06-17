@@ -36,6 +36,11 @@ h1 {
     padding-bottom: 50px;
 }
 
+#walletInfoTable > tbody {
+    display:table;
+    height: 0vh;
+}
+
 .modal-content{
     color: black;
 }
