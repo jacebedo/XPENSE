@@ -44,3 +44,12 @@ h1 {
 .modal-content{
     color: black;
 }
+
+.badInformation {
+    border: 2px solid red;
+    background-color: #ee918d;
+}
+
+#walletCreateErrorContainer, #expenseCreateErrorContainer {
+  color: red;
+}

@@ -52,7 +52,6 @@ $("#addExpense").click(function(){
             }
         });
     } else {
-        console.log(errorMap);
         displayExpenseModalError(errorMap);
     }
 });
@@ -77,12 +76,14 @@ function verifyWalletObject(wallet,errorMap){
         errorMap[1] = 1;
     }
     if (!isValidWalletBalance(wallet.balance)) {
+        console.log(errorMap);
         retval = false;
         errorMap[2] = 1;
+        console.log(errorMap);
     }
     if (!isValidWalletIncrement(wallet.increment,wallet.type)){
         retval = false;
-        errormap[3] = 1 ;
+        errorMap[3] = 1 ;
     }
     if (wallet.lastUpdated == undefined || wallet.lastUpdated == null){
         retval = false;
@@ -260,9 +261,32 @@ function updateWalletProfile(doc,status){
 }
 
 function displayWalletModalError(errorMap){
-    console.log("bad error!");
+    var body = `You have entered invalid information in one or more fields. Please try again! `;
+    $("#walletCreateErrorContainer").text(body);
+
+    var formSelectors = ["#walletName","#walletType","#walletBalance","#walletIncrement"];
+    for (i in errorMap){
+        if (errorMap[i] == 1) {
+            $(`${formSelectors[i]}`).addClass("badInformation");
+        }
+        else if( errorMap[i] == 0 && $(`${formSelectors[i]}`).hasClass("badInformation")) {
+            $(`${formSelectors[i]}`).removeClass("badInformation");
+        }
+      }
 }
 
+
 function displayExpenseModalError(errorMap){
-    console.log("Bad error");
+  var body = `You have entered invalid information in one or more fields. Please try again! `;
+  $("#expenseCreateErrorContainer").text(body);
+
+  var formSelectors = ["#expenseName","#expensePrice","#expenseType","#expenseWallet"];
+  for (i in errorMap){
+      if (errorMap[i] == 1) {
+          $(`${formSelectors[i]}`).addClass("badInformation");
+      }
+      else if( errorMap[i] == 0 && $(`${formSelectors[i]}`).hasClass("badInformation")) {
+          $(`${formSelectors[i]}`).removeClass("badInformation");
+      }
+    }
 }

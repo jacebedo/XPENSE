@@ -95,7 +95,9 @@ app.post("/users/addwallet/me", function(req,res,next){
             next();
             database.disconnect(db);
         });
-    };
+    } else {
+      res.status(412).end();
+    }
 },sendAllData);
 
 app.post("/users/addexpense/me",function(req,res,next){
@@ -116,6 +118,8 @@ app.post("/users/addexpense/me",function(req,res,next){
                 database.disconnect(db);
             });
         });
+    } else {
+      res.status(412).end();
     }
 },sendAllData);
 
@@ -161,6 +165,7 @@ app.delete("/users/delete/:username",function(req,res,next){
         database.disconnect(db);
     });
 });
+
 
 
 var port = process.env.PORT | 3000;

@@ -16,6 +16,7 @@
 
         <link rel="stylesheet" href="./css/profile.css" />
         <link rel="stylesheet" href="./css/scrollbars.css" />
+        <link rel="stylesheet" href="./css/style.css" />
 
         <script type="text/javascript" src="./js/profile.js" defer></script>
         <script type="text/javascript" src="./js/verify.js"></script>
@@ -80,6 +81,7 @@
                         <h5 class="modal-title"> Create a Wallet </h5>
                     </div>
                     <div class="modal-body">
+                        <div id="walletCreateErrorContainer"> </div>
                         <form id="walletForm" method="POST" action="/add/wallet">
                           <div class="form-group">
                             <label for="walletName"> Wallet Name </label>
@@ -132,6 +134,7 @@
                         <h3 class="modal-title"> Add an Expense </h3>
                     </div>
                     <div class="modal-body">
+                        <div id="expenseCreateErrorContainer"> </div>
                         <form id="expenseForm">
                           <div class="form-group">
                             <label for="expenseName"> Expense Name </label>
