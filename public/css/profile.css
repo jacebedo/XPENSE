@@ -1,7 +1,4 @@
-body {
-    background-color: #002e4d;
-    color:white;
-}
+
 
 #navContainer {
     display:block;
@@ -13,6 +10,9 @@ button#openWalletModalButton, button#openExpenseModalButton {
     height: 3rem;
 }
 
+button {
+  width: inherit;
+}
 table {
     width: 100%;
     max-width: 100%;
@@ -45,10 +45,7 @@ h1 {
     color: black;
 }
 
-.badInformation {
-    border: 2px solid red;
-    background-color: #ee918d;
-}
+
 
 #walletCreateErrorContainer, #expenseCreateErrorContainer {
   color: red;

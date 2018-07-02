@@ -2,3 +2,14 @@ body {
     background-color: #002e4d;
     color:white;
 }
+
+
+form > * {
+    margin-top: 5px;
+    margin-bottom: 5px;
+}
+
+input.badInformation {
+    border: 2px solid red;
+    background-color: #ee918d;
+}

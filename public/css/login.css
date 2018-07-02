@@ -3,18 +3,21 @@ body {
 }
 
 section {
+    background-color: #586994;
+
+    margin-left: 25vw ;
+    margin-top: 25vh;
+
     display: inline-block;
     padding: 50px;
-    border: 2px solid black;
-    border-radius: 15px;
-    width: 300px;
-    max-width: 300px;
+    border: 2px solid white;
+    width: 50vw;
+    max-width: 50vw;
     text-align: center;
 }
 
-form > * {
-    margin-top: 5px;
-    margin-bottom: 5px;
+a {
+  color : #B4C4AE;
 }
 
 input,button {
@@ -27,10 +30,8 @@ input,button {
     width: 200px;
 }
 
-input.badInformation {
-    border: 2px solid red;
-    background-color: #ee918d;
-}
+
+
 
 #errorcontainer {
     margin-bottom: 20px;
